@@ -1,12 +1,16 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [User, setUser] = useState({
-    firstName: "",
-    lastName: "",
+    fullName: "",
     email: "",
     password: "",
+    reEnterPassword: "",
   });
+
+  const Navigate = useNavigate();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -16,7 +20,8 @@ function Register() {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     console.log(User);
-    // await axios.post("http://localhost:5000/", User);
+    await axios.post("http://localhost:5000/user/signup", User);
+    Navigate("/");
   };
 
   return (
@@ -24,15 +29,8 @@ function Register() {
       <form onSubmit={handleOnSubmit}>
         <input
           type="text"
-          name="firstName"
-          placeholder="firstName"
-          onChange={handleOnChange}
-          required
-        />
-        <input
-          type="text"
-          name="lastName"
-          placeholder="lastName"
+          name="fullName"
+          placeholder="fullName"
           onChange={handleOnChange}
           required
         />
@@ -47,6 +45,13 @@ function Register() {
           type="password"
           name="password"
           placeholder="Enter Password"
+          onChange={handleOnChange}
+          required
+        />
+        <input
+          type="password"
+          name="reEnterPassword"
+          placeholder="re-EnterPassword"
           onChange={handleOnChange}
           required
         />

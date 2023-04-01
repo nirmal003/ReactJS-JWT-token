@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [User, setUser] = useState({
     email: "",
     password: "",
   });
+  const Navigate = useNavigate();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -14,7 +16,8 @@ function Login() {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:5000/", User);
+    await axios.post("http://localhost:5000/user/login", User);
+    Navigate("/");
   };
 
   return (
