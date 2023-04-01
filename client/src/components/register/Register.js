@@ -7,7 +7,6 @@ function Register() {
     email: "",
     password: "",
   });
-  const [state, setstate] = useState();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
